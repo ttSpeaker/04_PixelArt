@@ -70,5 +70,17 @@ function createCanvas() {
     grillaPixeles.appendChild(newPixel);
   }
 }
+function erraseCanvas() {
+  var $canvas = $("#grilla-pixeles").children("div");
+  for (i = 0; i < $canvas.length; i++) {
+    $($canvas[i]).animate({ backgroundColor: "white" }, 2000);
+  }
+}
+$("#borrar").click(erraseCanvas);
+$("#guardar").click(guardarPixelArt);
+
+var $superHeroes = $(".imgs").children("li").children("img");
+$superHeroes.click(function () { cargarSuperheroe($(this).attr("id"))});
+
 createPalette();
 createCanvas();
