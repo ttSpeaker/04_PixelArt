@@ -6,7 +6,7 @@
 
 body {
   text-align: center;
-  background-color: black;
+  background-color: whitesmoke;
 }
 
 /* Estos divs son los pixeles */
@@ -24,26 +24,30 @@ div {
 }
 
 button {
-  background: rgb(236, 236, 236);
-  border: none;
   border-radius: 7px;
-  color: black;
   font-family: 'Press Start 2P';
   font-size: .7em;
   line-height: 30px;
   display: block;
-  width: 100%;
-  margin: 10px 5px;
+
   -webkit-transition: all 0.25s ease-in-out 0s;
   transition: all 0.25s ease-in-out 0s;
   cursor: pointer;
-  
+  background: #ffffff;
+  border: solid #000000 2px;
+  color: #000000;
+  width: 65%;
+  padding: 10px 20px 10px 20px;
+  margin: 10px 20px 10px 20px;
+  box-shadow: -5px 5px 0px #000000;
+  transition: width 0.32s ease-in; 
 }
 #fill {
-  
+
 }
    button:hover{
   background: grey;
+  width:100%;
 } 
 ul {
   list-style: none;
@@ -57,14 +61,14 @@ p {
   text-align: right;
 }
 h1 {
-  color: white;
+  color: #000000;
   margin-bottom: 15px;
   margin-top: 10px;
   font-family: 'Press Start 2P';
 }
 
 h3 {
-  color: white;
+  color: #000000;
   margin-bottom: 15px;
   margin-top: 10px;
   font-family: 'Press Start 2P';
@@ -95,7 +99,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .custom {
-  color: white;
+  color: #000000;
 }
 
 .cursor-personalizado {
@@ -141,29 +145,27 @@ img {
   height: auto;
 }
  .input-color li {
-   margin: 10px 0;
    justify-content: space-between;
  }
 #indicador-de-color {
-  height: 30px;
-  width: 30px;
-  border: 1px solid white;
-  margin: 0;
-  position: relative;
 
+  
+  position: relative;
+  
+}
+#inddicador-de-color:hover {
+  width: 100%;
 }
 #indicador-de-color:after {
   content: "";
   position: absolute;
   z-index: -1;
-  top: -1px;
-  left: -1px;
-  height: 29px;
-  width: 29px;
+
+
   background: url(../img/empty.gif);
 }
 #indicador-de-color-mensaje {
-  color: white;
+  color: #000000;
 }
 
 #result {

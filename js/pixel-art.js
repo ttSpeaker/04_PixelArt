@@ -97,7 +97,7 @@ $(document).ready(function () {
   });
   $("#fill").mouseleave(function(){
     console.log("mouse left");
-    $(this).animate({ backgroundColor: "rgb(236, 236, 236)" }, 100);
+    $(this).animate({ backgroundColor: "white" }, 100);
   });
   $('#batman').click(function () { cargarSuperheroe(batman); })
   $('#wonder').click(function () { cargarSuperheroe(wonder); })
