@@ -72,15 +72,36 @@ function createCanvas() {
 }
 function erraseCanvas() {
   var $canvas = $("#grilla-pixeles").children("div");
-  for (i = 0; i < $canvas.length; i++) {
+  for (var i = 0; i < $canvas.length; i++) {
     $($canvas[i]).animate({ backgroundColor: "white" }, 2000);
   }
 }
-$("#borrar").click(erraseCanvas);
-$("#guardar").click(guardarPixelArt);
 
-var $superHeroes = $(".imgs").children("li").children("img");
-$superHeroes.click(function () { cargarSuperheroe($(this).attr("id"))});
+function fillCanvas() {
+  var $canvas = $("#grilla-pixeles").children("div");
+  for (var i = 0; i < $canvas.length; i++) {
+    $($canvas[i]).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 100);
+    
+  }
+}
+
 
 createPalette();
 createCanvas();
+$(document).ready(function () {
+  $("#borrar").click(erraseCanvas);
+  $("#guardar").click(guardarPixelArt);
+  $("#fill").click(fillCanvas);
+  $("#fill").mouseenter(function(){
+    $(this).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 100);
+  });
+  $("#fill").mouseleave(function(){
+    console.log("mouse left");
+    $(this).animate({ backgroundColor: "rgb(236, 236, 236)" }, 100);
+  });
+  $('#batman').click(function () { cargarSuperheroe(batman); })
+  $('#wonder').click(function () { cargarSuperheroe(wonder); })
+  $('#flash').click(function () { cargarSuperheroe(flash); })
+  $('#invisible').click(function () { cargarSuperheroe(invisible); })
+
+})
