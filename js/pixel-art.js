@@ -22,8 +22,8 @@ var nombreColores = ['White', 'LightYellow',
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
-var colorPersonalizado = document.getElementById('color-personalizado');
 var indicadorDeColor = document.getElementById("indicador-de-color");
+var colorPersonalizado = document.getElementById('color-personalizado');
 colorPersonalizado.addEventListener('change',
   (function () {
     // Se guarda el color de la rueda en colorActual
@@ -33,8 +33,16 @@ colorPersonalizado.addEventListener('change',
 
   })
 );
+
+
+var mousePressed = false;
+document.addEventListener("mousedown", function () { mousePressed = true; });
+document.addEventListener("mouseup", function () { mousePressed = false; });
+
+
 function changeSelectedColor(e) {
   indicadorDeColor.style.background = e.target.style.backgroundColor;
+
 }
 function createPalette() {
   var paleta = document.getElementById("paleta");
@@ -47,11 +55,6 @@ function createPalette() {
     paleta.appendChild(newDiv);
   }
 }
-var mousePressed = false;
-document.addEventListener("mousedown", function () { mousePressed = true; });
-document.addEventListener("mouseup", function () { mousePressed = false; });
-
-
 
 function createCanvas() {
   var grillaPixeles = document.getElementById("grilla-pixeles");
@@ -81,7 +84,7 @@ function fillCanvas() {
   var $canvas = $("#grilla-pixeles").children("div");
   for (var i = 0; i < $canvas.length; i++) {
     $($canvas[i]).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 100);
-    
+
   }
 }
 
@@ -92,11 +95,10 @@ $(document).ready(function () {
   $("#borrar").click(erraseCanvas);
   $("#guardar").click(guardarPixelArt);
   $("#fill").click(fillCanvas);
-  $("#fill").mouseenter(function(){
-    $(this).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 100);
+  $("#fill").mouseenter(function () {
+    $(this).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 300);
   });
-  $("#fill").mouseleave(function(){
-    console.log("mouse left");
+  $("#fill").mouseleave(function () {
     $(this).animate({ backgroundColor: "white" }, 100);
   });
   $('#batman').click(function () { cargarSuperheroe(batman); })
