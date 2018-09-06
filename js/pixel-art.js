@@ -19,7 +19,7 @@ var nombreColores = ['White', 'LightYellow',
   'MediumPurple', 'Lavender', 'Gainsboro', 'LightGray', 'Silver', 'DarkGray', 'Gray',
   'DimGray', 'LightSlateGray', 'DarkSlateGray', 'Black'
 ];
-
+// 53 pixeles por fila
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
 var indicadorDeColor = document.getElementById("indicador-de-color");
@@ -87,7 +87,9 @@ function fillCanvas() {
 
   }
 }
-
+function bigBrushPaint(){
+  
+}
 
 createPalette();
 createCanvas();
