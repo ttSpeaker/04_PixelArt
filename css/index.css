@@ -40,7 +40,6 @@ button{
   width: 65%;
   padding: 0 20px 0 20px;
   margin: 10px 20px 10px 20px;
-  box-shadow: -4px 4px 0px #000000;
   transition: width 0.32s ease-in; 
 }
 #fill {
@@ -50,7 +49,8 @@ button{
    button:hover{
   background: lightgray;
   width:100%;
-  box-shadow: -6px 6px 0px #000000;
+  border: solid #000000 2px;
+  box-shadow: -5px 5px 0px #000000;
 } 
 
 ul {

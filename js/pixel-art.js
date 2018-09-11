@@ -24,6 +24,7 @@ var nombreColores = ['White', 'LightYellow',
 // Es decir, el que se elige con la rueda de color.
 var indicadorDeColor = document.getElementById("indicador-de-color");
 var colorPersonalizado = document.getElementById('color-personalizado');
+var currentTool = "none";
 colorPersonalizado.addEventListener('change',
   (function () {
     // Se guarda el color de la rueda en colorActual
@@ -56,21 +57,76 @@ function createPalette() {
   }
 }
 
+
 function createCanvas() {
   var grillaPixeles = document.getElementById("grilla-pixeles");
   var newPixel;
-  for (var i = 0; i < 1750; i++) {
+  for (var i = 1; i <= 1750; i++) {
     newPixel = document.createElement("div");
+    newPixel.id = i;
     newPixel.addEventListener("click", function (e) {
-      e.target.style.backgroundColor = indicadorDeColor.style.background;
-
+      switch (currentTool) {
+        case 'indicador-de-color':
+          paintBrush(e);
+          break;
+        case 'shape':
+          paintShape(e.target.id);
+          break;
+        case 'erraser':
+          erraseBrush(e);
+          break;
+      }
     });
     newPixel.addEventListener("mousemove", function (e) {
       if (mousePressed) {
-        e.target.style.backgroundColor = indicadorDeColor.style.background;
+        switch (currentTool) {
+          case 'indicador-de-color':
+            paintBrush(e);
+            break;
+          case 'shape':
+            paintShape(e.target.id);
+            break;
+          case 'erraser':
+            erraseBrush(e);
+            break;
+        }
       }
     });
     grillaPixeles.appendChild(newPixel);
+  }
+}
+
+function changeTool(tool) {
+  $("#" + currentTool).css({ border: "solid #000000 2px", 'box-shadow': '0px 0px 0px #000000' });
+  $("#" + tool).css({ border: "solid #000000 2px", 'box-shadow': '-5px 5px 0px #000000' });
+
+  currentTool = tool;
+}
+
+function paintBrush(e) {
+  e.target.style.backgroundColor = indicadorDeColor.style.background;
+}
+function erraseBrush(e) {
+  e.target.style.backgroundColor = 'white';
+}
+function paintShape(e) {
+  var size = 5;
+  var useSize = ((size - 1) / 2)
+  var index = e - 0;
+  for (var i = useSize * -1; i <= useSize; i++) {
+    if (i < 0) {
+      for (var j = useSize * -1 + i * -1; j <= useSize - i * -1; j++) {
+        if (document.getElementById(index + i * 53 + j) != null) {
+          document.getElementById(index + i * 53 + j).style.backgroundColor = indicadorDeColor.style.background;
+        }
+      }
+    } else {
+      for (j = -2 + i; j <= 2 - i; j++) {
+        if (document.getElementById(index + i * 53 + j) != null) {
+          document.getElementById(index + i * 53 + j).style.backgroundColor = indicadorDeColor.style.background;
+        }
+      }
+    }
   }
 }
 function erraseCanvas() {
@@ -84,18 +140,19 @@ function fillCanvas() {
   var $canvas = $("#grilla-pixeles").children("div");
   for (var i = 0; i < $canvas.length; i++) {
     $($canvas[i]).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 100);
-
   }
 }
-function bigBrushPaint(){
-  
-}
+
+
 
 createPalette();
 createCanvas();
+/* eventos en las herramientas */
 $(document).ready(function () {
-  $("#borrar").click(erraseCanvas);
-  $("#guardar").click(guardarPixelArt);
+  $("#indicador-de-color").click(function () { changeTool("indicador-de-color"); });
+  $("#shape").click(function () { changeTool("shape"); });
+  $("#clear").click(erraseCanvas);
+  $("#save").click(guardarPixelArt);
   $("#fill").click(fillCanvas);
   $("#fill").mouseenter(function () {
     $(this).animate({ backgroundColor: $("#indicador-de-color").css("background") }, 300);
@@ -103,6 +160,8 @@ $(document).ready(function () {
   $("#fill").mouseleave(function () {
     $(this).animate({ backgroundColor: "white" }, 100);
   });
+  /* eventos en imagenes super heroes */
+  $("#erraser").click(function () { changeTool("erraser"); });
   $('#batman').click(function () { cargarSuperheroe(batman); })
   $('#wonder').click(function () { cargarSuperheroe(wonder); })
   $('#flash').click(function () { cargarSuperheroe(flash); })
